@@ -20,26 +20,28 @@ pending a response.
 
 ## 2. Setup
 
+For example folders:
+C:\MyFolder/JAppTracker or /MyFolder/JAppTracker
+
 ```bash
-cd "D:/Claude Work - Projects/Job-Tracker-App"
+# cd "C:\MyFolder/JAppTracker" # Windows
+# cd "/MyFolder/JAppTracker # Linux / macOS / Unix / BSD
 
-# Create a virtual environment
 python -m venv venv
-venv\Scripts\activate            # Windows
-# source venv/bin/activate       # Linux / macOS
+# venv\Scripts\activate            # Windows
+# source venv/bin/activate       # Linux / macOS / Unix (bash/zsh/csh/tcsh)/ BSD
+# . venv/bin/activate           # Unix(sh)
 
-# Install dependencies
 pip install -r requirements.txt
 
-# Copy and edit environment variables
-copy .env.example .env           # Windows
-# cp .env.example .env           # Linux / macOS
+#copy .env.example .env           # Windows
+# cp .env.example .env           # Linux / macOS / Unix / BSD
 ```
 
 Open `.env` and fill in:
 
 - `DB_PASSWORD` — your Azure MySQL password
-- SMTP section — GMail app password works best
+- SMTP segment — GMail app password is most effective
   (create one at <https://myaccount.google.com/apppasswords>)
 
 ---
@@ -53,7 +55,7 @@ python app.py
 Open <http://localhost:5000> in your browser.
 
 To access from your phone/tablet on the same Wi-Fi network:
-`http://<your-pc-ip>:5000` (find IP with `ipconfig`).
+`http://<your-pc-ip>:5000` (find IP with `ipconfig` on Windows, `ip` for Linux and `ifconfig` for macOS/Unix/BSD).
 
 ---
 
@@ -82,7 +84,7 @@ When you're ready, the process is roughly:
 
 1. Copy the folder to the server
 2. Install Python + create the venv there
-3. Run under `gunicorn` behind `nginx` as a systemd service
+3. Run under `gunicorn` behind `nginx` as a systemd service (for Apache Web Server/ `httpd` use `mod_wsgi`) 
 4. Add the server's public IP to the Azure MySQL firewall
 5. (Optional) Add auth since it will be reachable from the internet
 
