@@ -1,4 +1,4 @@
-# Job Tracker — Flask + Azure MySQL
+# JApp Tracker
 
 A minimal web app for managing the `JobsData` table in your `job-tracker`
 Azure MySQL database. Supports Create, Read, Update, Delete, and sends
@@ -39,7 +39,7 @@ copy .env.example .env           # Windows
 Open `.env` and fill in:
 
 - `DB_PASSWORD` — your Azure MySQL password
-- SMTP section — Gmail app password works best
+- SMTP section — GMail app password works best
   (create one at <https://myaccount.google.com/apppasswords>)
 
 ---
@@ -52,7 +52,7 @@ python app.py
 
 Open <http://localhost:5000> in your browser.
 
-To access from your phone on the same Wi-Fi network:
+To access from your phone/tablet on the same Wi-Fi network:
 `http://<your-pc-ip>:5000` (find IP with `ipconfig`).
 
 ---
@@ -73,29 +73,10 @@ Reminder logic: includes applications where
 `post_status` is still one of `Applied`, `Application Viewed`, or
 `Pending Response`.
 
----
-
-## 5. Project Structure
-
-```
-Job-Tracker-App/
-├── app.py                 # Flask routes (CRUD)
-├── db.py                  # MySQL connection helper
-├── reminders.py           # Email scheduler + digest builder
-├── requirements.txt
-├── .env.example           # Copy to .env and fill in
-├── DigiCertGlobalRootCA.crt.pem   # You download this
-├── templates/
-│   ├── base.html
-│   ├── index.html         # Applications table
-│   └── form.html          # New / Edit form
-└── static/
-    └── style.css
-```
 
 ---
 
-## 6. Later — Deploying to your Debian server
+## 6. Later — Deploying to your Linux server
 
 When you're ready, the process is roughly:
 
@@ -105,7 +86,6 @@ When you're ready, the process is roughly:
 4. Add the server's public IP to the Azure MySQL firewall
 5. (Optional) Add auth since it will be reachable from the internet
 
-Happy to write the deployment files when you reach that step.
 
 ---
 
