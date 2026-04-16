@@ -1,4 +1,4 @@
-# Job Tracker Web App (Flask + Azure MySQL + Render)
+# Job Tracker Web App (Azure MySQL + Render)
 
 A simple web application built with Flask to track job applications.
 It supports full CRUD operations and sends automated email reminders for follow-ups.
