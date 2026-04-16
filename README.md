@@ -91,3 +91,40 @@ App runs at:
 
 http://localhost:5000
 
+🌐 Deployment (Render)
+1. Push to GitHub
+
+git init
+git add .
+git commit -m "initial commit"
+git remote add origin <your-repo-url>
+git push -u origin main
+
+2. Create Render Web Service
+Connect GitHub repo
+Environment: Python
+
+Build Command
+
+pip install -r requirements.txt
+
+Start Command
+
+gunicorn wsgi:app
+
+3. Add Environment Variables in Render
+
+Copy all values from your .env into Render dashboard.
+
+🔔 Reminder System
+Checks applications where:
+date_applied = 3, 5, or 7 days ago
+status is still open
+Sends a daily email digest
+
+Manual trigger:
+
+POST /send-reminders
+
+
+
