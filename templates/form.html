@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>{{ action }}</h2>
+
+<form method="post" class="record-form">
+  <div class="grid">
+
+    <label>Date Applied
+      <input type="date" name="date_applied"
+             value="{{ row.date_applied if row else '' }}" required>
+    </label>
+
+    <label>Job Title
+      <input type="text" name="job_title"
+             value="{{ row.job_title if row else '' }}" required>
+    </label>
+
+    <label>Job Type
+      <select name="job_type">
+        <option value="">—</option>
+        {% for t in job_types %}
+          <option value="{{ t }}" {% if row and row.job_type == t %}selected{% endif %}>{{ t }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>Job Site
+      <input type="text" name="job_site"
+             value="{{ row.job_site if row else '' }}"
+             placeholder="Linkedin / Indeed / Direct Emp Website">
+    </label>
+
+    <label>Location
+      <input type="text" name="location"
+             value="{{ row.location if row else '' }}">
+    </label>
+
+    <label>Post Status
+      <select name="post_status">
+        <option value="">—</option>
+        {% for s in statuses %}
+          <option value="{{ s }}" {% if row and row.post_status == s %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>Company
+      <input type="text" name="company"
+             value="{{ row.company if row else '' }}">
+    </label>
+
+    <label>Day 3 Follow-up
+      <input type="date" name="day_3"
+             value="{{ row.day_3 if row else '' }}">
+    </label>
+
+    <label>Day 5 Follow-up
+      <input type="date" name="day_5"
+             value="{{ row.day_5 if row else '' }}">
+    </label>
+
+    <label>Day 7 Follow-up
+      <input type="date" name="day_7"
+             value="{{ row.day_7 if row else '' }}">
+    </label>
+
+    <label>Hiring Manager
+      <input type="text" name="hiring_manager"
+             value="{{ row.hiring_manager if row else '' }}">
+    </label>
+
+    <label>Company Email
+      <input type="email" name="company_email"
+             value="{{ row.company_email if row else '' }}">
+    </label>
+
+    <label>Call (Y/N)
+      <select name="call_yn">
+        <option value="">—</option>
+        <option value="Y" {% if row and row.call_yn == 'Y' %}selected{% endif %}>Y</option>
+        <option value="N" {% if row and row.call_yn == 'N' %}selected{% endif %}>N</option>
+      </select>
+    </label>
+
+    <label>Rejection Date
+      <input type="date" name="rejection_date"
+             value="{{ row.rejection_date if row else '' }}">
+    </label>
+
+    <label>Interview Date
+      <input type="date" name="interview_date"
+             value="{{ row.interview_date if row else '' }}">
+    </label>
+
+  </div>
+
+  <div class="form-actions">
+    <button class="btn primary" type="submit">Save</button>
+    <a class="btn subtle" href="{{ url_for('index') }}">Cancel</a>
+  </div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form class="filters" method="get" action="{{ url_for('index') }}">
+  <input type="text" name="q" value="{{ q }}" placeholder="Search title, company, location...">
+  <select name="status">
+    <option value="">All statuses</option>
+    {% for s in statuses %}
+      <option value="{{ s }}" {% if s == status %}selected{% endif %}>{{ s }}</option>
+    {% endfor %}
+  </select>
+  <button class="btn" type="submit">Filter</button>
+  <a class="btn subtle" href="{{ url_for('index') }}">Reset</a>
+  <span class="count">{{ rows|length }} row(s)</span>
+</form>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Date Applied</th>
+      <th>Job Title</th>
+      <th>Type</th>
+      <th>Site</th>
+      <th>Location</th>
+      <th>Status</th>
+      <th>Company</th>
+      <th>Hiring Mgr</th>
+      <th>Rejected</th>
+      <th>Interview</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for r in rows %}
+    <tr class="status-{{ r.post_status|replace(' ', '-')|lower }}">
+      <td>{{ r.id }}</td>
+      <td>{{ r.date_applied or '' }}</td>
+      <td>{{ r.job_title or '' }}</td>
+      <td>{{ r.job_type or '' }}</td>
+      <td>{{ r.job_site or '' }}</td>
+      <td>{{ r.location or '' }}</td>
+      <td><span class="pill">{{ r.post_status or '' }}</span></td>
+      <td>{{ r.company or '' }}</td>
+      <td>{{ r.hiring_manager or '' }}</td>
+      <td>{{ r.rejection_date or '' }}</td>
+      <td>{{ r.interview_date or '' }}</td>
+      <td class="actions">
+        <a class="btn small" href="{{ url_for('edit', row_id=r.id) }}">Edit</a>
+        <form method="post" action="{{ url_for('delete', row_id=r.id) }}"
+              onsubmit="return confirm('Delete application #{{ r.id }}?');"
+              style="display:inline;">
+          <button class="btn small danger" type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+  {% else %}
+    <tr><td colspan="12" class="empty">No applications match.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+
+{% endblock %}
